@@ -24,26 +24,20 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-
+          
       # Agregar una acción de notificación (Este es un ejemplo básico)
       - name: Notify team
         uses: actions/github-script@v4
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const { Octokit } = require("octokit");
-
-            const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
-
-            const members = await octokit.teams.listMembersInOrg({
+            const members = await github.teams.listMembersInOrg({
               org: "Aaaprueba", // Reemplazar <ORG_NAME> por el nombre de tu organización
               team_slug: "equipo", // Reemplazar <TEAM_SLUG> por el slug de tu equipo
             });
-
             const usernames = members.data.map(member => member.login);
-
             const notifications = usernames.map(username => {
-              return octokit.activity.createThread({
+              return github.activity.createThread({
                 subject_type: "Repository",
                 subject_id: context.repo.repo,
                 thread_title: "Workflow completed",
@@ -51,5 +45,4 @@ jobs:
                 text: "The workflow has completed successfully.",
               });
             });
-
             await Promise.all(notifications);
