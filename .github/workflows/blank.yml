@@ -33,7 +33,7 @@ jobs:
           script: |
             const members = await github.teams.listMembersInOrg({
               org: "Aaaprueba", // Reemplazar <ORG_NAME> por el nombre de tu organización
-              team_slug: "equipo", // Reemplazar <TEAM_SLUG> por el slug de tu equipo
+              team_slug: "Equipo", // Reemplazar <TEAM_SLUG> por el slug de tu equipo
             });
             const usernames = members.data.map(member => member.login);
             const notifications = usernames.map(username => {
