@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ "main" ]
   workflow_run:
-    workflows: [ "CI" ] # Cambia "CI" por el nombre de tu flujo de trabajo
+    workflows: [ "hola" ] # Cambia "CI" por el nombre de tu flujo de trabajo
     types:
       - completed
 
